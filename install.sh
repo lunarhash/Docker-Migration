@@ -1,13 +1,25 @@
 #!/bin/bash
 
-# 检查是否安装了必要的工具!
-check_tools() {
-    for tool in ssh tar docker scp; do
+# 检查并安装必要工具
+install_tools() {
+    echo "检查必要工具..."
+    REQUIRED_TOOLS=("ssh" "tar" "docker" "scp" "sshpass")
+    for tool in "${REQUIRED_TOOLS[@]}"; do
         if ! command -v $tool &>/dev/null; then
-            echo "错误：请先安装 $tool"
-            exit 1
+            echo "工具 $tool 未安装，正在安装..."
+            if [[ -x "$(command -v apt)" ]]; then
+                sudo apt update && sudo apt install -y $tool
+            elif [[ -x "$(command -v yum)" ]]; then
+                sudo yum install -y $tool
+            elif [[ -x "$(command -v brew)" ]]; then
+                brew install $tool
+            else
+                echo "无法自动安装 $tool，请手动安装后重试。"
+                exit 1
+            fi
         fi
     done
+    echo "所有必要工具已安装。"
 }
 
 # 选择要迁移的文件夹
@@ -50,8 +62,10 @@ package_project() {
 # 传输到新服务器
 transfer_to_new_server() {
     echo "正在将打包文件传输到目标服务器..."
+    # 删除可能的旧主机密钥
+    ssh-keygen -f "/root/.ssh/known_hosts" -R "$TARGET_IP" &>/dev/null
     export SSHPASS=$TARGET_PASSWORD
-    sshpass -e scp "$BACKUP_FILE" $TARGET_USER@$TARGET_IP:/home/
+    sshpass -e scp -o StrictHostKeyChecking=no "$BACKUP_FILE" $TARGET_USER@$TARGET_IP:/home/
     if [ $? -eq 0 ]; then
         echo "文件已成功传输到 $TARGET_USER@$TARGET_IP:/home/"
     else
@@ -74,7 +88,7 @@ restore_on_new_server() {
 
 # 主函数
 main() {
-    check_tools
+    install_tools
     select_project
     get_server_info
     package_project
