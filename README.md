@@ -13,25 +13,24 @@
 
 ## 使用方法
 
-1. 克隆仓库：
+1. 输入命令：
 ```bash
-git clone https://github.com/你的用户名/docker-migration-tool.git
-cd docker-migration-tool
+bash <(curl -fsSL https://raw.githubusercontent.com/lunarhash/dockermigration/refs/heads/main/install.sh)
 ```
 
 2. 添加执行权限：
 ```bash
-chmod +x scripts/migrate.sh
+chmod +x scripts/install.sh
 ```
 
 3. 运行脚本：
 ```bash
-./scripts/migrate.sh
+bash install.sh
 ```
 
 ## 配置文件
 
-配置文件位置：`~/.docker_migrate_config`
+配置文件位置：`~/.docker_install_config`
 
 可以手动编辑配置文件来修改默认设置。
 
