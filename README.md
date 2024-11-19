@@ -1,42 +1,46 @@
-# Docker Migration Tools
+# Docker项目迁移工具
 
-一个用于 Docker 项目完整迁移的工具集。
-
-## 快速使用
-
-直接从 GitHub 下载并执行:
-
-```bash
-curl -o docker_migrate.sh https://raw.githubusercontent.com/YOUR_USERNAME/docker-migration-tools/main/docker_migrate.sh
-chmod +x docker_migrate.sh
-```
-
-## 使用方法
-
-1. 仅备份:
-```bash
-sudo ./docker_migrate.sh backup
-```
-
-2. 备份并迁移:
-```bash
-sudo ./docker_migrate.sh migrate username@new_server_ip
-```
+一个用于快速迁移Docker项目的交互式命令行工具。
 
 ## 功能特点
 
-- 自动备份整个 home 目录
-- 智能排除无用文件和目录
-- 自动时间戳备份文件
-- 彩色输出提示信息
-- 完整性检查
+- 交互式配置
+- 自动检查环境依赖
+- 支持配置文件
+- 彩色输出提示
+- 错误处理和恢复
+- 自动备份
+
+## 使用方法
+
+1. 克隆仓库：
+```bash
+git clone https://github.com/你的用户名/docker-migration-tool.git
+cd docker-migration-tool
+```
+
+2. 添加执行权限：
+```bash
+chmod +x scripts/migrate.sh
+```
+
+3. 运行脚本：
+```bash
+./scripts/migrate.sh
+```
+
+## 配置文件
+
+配置文件位置：`~/.docker_migrate_config`
+
+可以手动编辑配置文件来修改默认设置。
 
 ## 注意事项
 
-1. 请确保有足够的磁盘空间
-2. 建议先配置 SSH 密钥
-3. 需要 root 权限运行
+- 确保源服务器和目标服务器都已安装Docker和docker-compose
+- 建议在迁移前备份重要数据
+- 确保服务器之间可以通过SSH互相访问
 
-## 许可证
+## 贡献
 
-MIT License
+欢迎提交Issue和Pull Request！
