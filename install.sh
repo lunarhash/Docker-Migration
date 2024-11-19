@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 检查是否安装了必要的工具
+# 检查是否安装了必要的工具!
 check_tools() {
     for tool in ssh tar docker scp; do
         if ! command -v $tool &>/dev/null; then
