@@ -7,7 +7,6 @@
 - 交互式配置
 - 自动检查环境依赖
 - 支持配置文件
-- 彩色输出提示
 - 错误处理和恢复
 - 自动备份
 
@@ -16,16 +15,6 @@
 1. 输入命令：
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/lunarhash/dockermigration/refs/heads/main/install.sh)
-```
-
-2. 添加执行权限：
-```bash
-chmod +x scripts/install.sh
-```
-
-3. 运行脚本：
-```bash
-bash install.sh
 ```
 
 ## 配置文件
@@ -39,7 +28,3 @@ bash install.sh
 - 确保源服务器和目标服务器都已安装Docker和docker-compose
 - 建议在迁移前备份重要数据
 - 确保服务器之间可以通过SSH互相访问
-
-## 贡献
-
-欢迎提交Issue和Pull Request！
